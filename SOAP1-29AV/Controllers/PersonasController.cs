@@ -18,7 +18,7 @@ namespace SOAP1_29AV.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return Ok(_persona.ObtenerLista());
+            return Ok(_persona.ObtenerEmpleado());
         }
     }
 }

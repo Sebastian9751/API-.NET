@@ -38,5 +38,28 @@ namespace Service.Services
 
             return personas;
         }
+
+       
+
+        List<EmpleadosVM> IPersona.ObtenerEmpleado()
+        {
+            List<EmpleadosVM> empleados = new List<EmpleadosVM>();
+            try
+            {
+                empleados = personaRepositorio.ObtenerEmpleados().Select(x => new EmpleadosVM()
+                {
+                    Nombre = x.Name,
+                    Apellidos = x.Lastname,
+                    Area = x.Area.Nombre,
+                    Email = x.Name,
+                    NumEmpleado = x.NumEmpleado
+                }).ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return empleados;
+        }
     }
 }

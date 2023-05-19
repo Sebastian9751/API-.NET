@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\titho\source\repos\SOA\Domain\Entities\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\titho\source\repos\SOA\Domain\Entities\.editorconfig" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using System;
 using System.Collections.Generic;
@@ -33,5 +34,13 @@ namespace Repository.DAO
             return lista;
 
         }
+
+        public List<Empleado> ObtenerEmpleados()
+        {
+            List<Empleado> lis = new List<Empleado>();
+            lis = _context.Empleados.Include(x=>x.Area).ToList();
+            return lis;
+        }
+
     }
 }

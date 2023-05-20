@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Service.IServices;
 
 namespace SOAP1_29AV.Controllers

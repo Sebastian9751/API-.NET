@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
 
 namespace SOAP1_29AV.Controllers
@@ -28,10 +27,6 @@ namespace SOAP1_29AV.Controllers
 
             return Ok(_persona.ObtenerEmpleado());
         }
-
-
-       
-
 
     }
 }

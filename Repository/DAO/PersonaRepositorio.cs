@@ -1,17 +1,9 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net.Mail;
-using System.Net.Sockets;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+
 
 namespace Repository.DAO
 {

@@ -23,6 +23,11 @@ namespace Domain.Entities
         public string CURP { get; set; }
         [StringLength(13)]
         public string RFC { get; set; }
+
+        [StringLength(50)]
+        public string email { get; set; }
+
+
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
 

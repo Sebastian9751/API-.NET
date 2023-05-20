@@ -61,13 +61,14 @@ namespace Service.Services
             {
                 smtpClient.Send(message);
                 result = true;
-                status = "Email sent successfully = " + result;
+                status = "Envio de correo realizado con exito = " + result;
             
             }
             catch (SmtpException e)
             {
                 _logger.LogError(e.Message);
-                
+                status = "Parece que hubo un error en la solicitud: \n" + e.Message;
+
             }
 
             smtpClient.Dispose();

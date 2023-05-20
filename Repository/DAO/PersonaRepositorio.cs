@@ -1,23 +1,24 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace Repository.DAO
 {
     public class PersonaRepositorio
     {
         private readonly ApplicationDbContext _context;
+        
 
         public PersonaRepositorio(ApplicationDbContext context)
         {
             _context = context;
+            
         }
+
+       
 
         public List<Persona> ObtenerLista()
         {
@@ -35,5 +36,38 @@ namespace Repository.DAO
             return lis;
         }
 
+        public string sedEmail(string email,string secret, string detination)
+        {
+            
+            string status = "";
+
+            MailMessage message = new MailMessage(email, detination, "Hello", "World");
+            message.IsBodyHtml = true;
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential(email, secret);
+
+            try
+            {
+                smtpClient.Send(message);
+                status = "Envio de correo realizado con exito staus : OK ";
+
+            }
+            catch (SmtpException e)
+            {
+               
+                status = "Parece que hubo un error en la solicitud: \n" + e.Message;
+
+            }
+
+            smtpClient.Dispose();
+
+
+
+            return status;
+
+        }
+            
     }
 }

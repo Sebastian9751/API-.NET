@@ -5,7 +5,7 @@ using Service.IServices;
 namespace SOAP1_29AV.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/email")]
     public class EmailController : Controller
     {
         private readonly IPersona _persona;
@@ -24,5 +24,17 @@ namespace SOAP1_29AV.Controllers
             string contrasena = _configuration.GetSection("EmailConfig:secret").Value;
             return Ok(_persona.SendMail(correo, contrasena));
         }
+
+        [HttpGet("message")]
+
+        public IActionResult sendMessage()
+        {
+
+            return Ok(_persona.sendMessage());
+        }
+
+
+
+
     }
 }

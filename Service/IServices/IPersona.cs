@@ -13,5 +13,7 @@ namespace Service.IServices
         List<EmpleadosVM> ObtenerEmpleado();
 
         string SendMail(string email, string secret);
+
+        List<string> sendMessage();
     }
 }

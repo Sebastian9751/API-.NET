@@ -32,6 +32,7 @@ namespace Service.Services
             try
             {
                 personas = personaRepositorio.ObtenerLista();
+
             }
             catch (Exception e)
             {
@@ -41,38 +42,28 @@ namespace Service.Services
             return personas;
         }
 
-        public string SendMail(string email, string secret)
+        public List<string> sendMessage()
         {
-            Boolean result;
-            string status = "";
-
-            MailMessage message = new MailMessage(email, email, "Hello", "World");
-            message.IsBodyHtml = true;
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.EnableSsl = true;
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential(email, secret);
+            List<string> emails = new List<string>();
 
             try
             {
-                smtpClient.Send(message);
-                result = true;
-                status = "Envio de correo realizado con exito = " + result;
-            
+                List<Persona> personas = personaRepositorio.ObtenerLista();
+
+                foreach (Persona persona in personas)
+                {
+                    emails.Add(persona.email);
+                }
             }
-            catch (SmtpException e)
+            catch (Exception e)
             {
                 _logger.LogError(e.Message);
-                status = "Parece que hubo un error en la solicitud: \n" + e.Message;
-
             }
 
-            smtpClient.Dispose();
-
-
-
-            return status;
+            return emails;
         }
+
+        
 
         List<EmpleadosVM> IPersona.ObtenerEmpleado()
         {
@@ -93,6 +84,11 @@ namespace Service.Services
                 _logger.LogError(e.Message);
             }
             return empleados;
+        }
+
+        public string SendMail(string email, string secret )
+        {
+            return  "hola";
         }
     }
 }

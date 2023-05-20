@@ -51,7 +51,7 @@ namespace Service.Services
                     Nombre = x.Name,
                     Apellidos = x.Lastname,
                     Area = x.Area.Nombre,
-                    Email = x.Name,
+                    Email = x.email,
                     NumEmpleado = x.NumEmpleado
                 }).ToList();
             }

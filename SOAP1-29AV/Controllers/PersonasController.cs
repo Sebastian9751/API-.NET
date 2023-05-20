@@ -5,7 +5,7 @@ using Service.IServices;
 namespace SOAP1_29AV.Controllers
 {
     [ApiController]
-    [Route("persona")]
+    [Route("personas")]
     public class PersonasController : Controller
     {
         private readonly IPersona _persona;
@@ -21,7 +21,7 @@ namespace SOAP1_29AV.Controllers
             return Ok(_persona.ObtenerLista());
         }
 
-        [HttpGet("empleado")]
+        [HttpGet("empleados")]
 
         public IActionResult getPesona()
         {

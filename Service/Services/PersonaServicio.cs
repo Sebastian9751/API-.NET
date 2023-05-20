@@ -42,9 +42,10 @@ namespace Service.Services
             return personas;
         }
 
-        public List<string> sendMessage()
+        public List<string> sendMessage(string email, string secret)
         {
             List<string> emails = new List<string>();
+            
 
             try
             {
@@ -52,7 +53,8 @@ namespace Service.Services
 
                 foreach (Persona persona in personas)
                 {
-                    emails.Add(persona.email);
+                    personaRepositorio.sedEmail(email, secret, persona.email);
+                    emails.Add("Correo enviado a :"+persona.email);
                 }
             }
             catch (Exception e)
@@ -86,9 +88,6 @@ namespace Service.Services
             return empleados;
         }
 
-        public string SendMail(string email, string secret )
-        {
-            return  "hola";
-        }
+       
     }
 }

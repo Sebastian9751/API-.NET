@@ -17,20 +17,13 @@ namespace SOAP1_29AV.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            string correo = _configuration.GetSection("EmailConfig:email").Value;
-            string contrasena = _configuration.GetSection("EmailConfig:secret").Value;
-            return Ok(_persona.SendMail(correo, contrasena));
-        }
-
         [HttpGet("message")]
 
         public IActionResult sendMessage()
         {
-
-            return Ok(_persona.sendMessage());
+            string correo = _configuration.GetSection("EmailConfig:email").Value;
+            string contrasena = _configuration.GetSection("EmailConfig:secret").Value;
+            return Ok(_persona.sendMessage(correo,contrasena));
         }
 
 

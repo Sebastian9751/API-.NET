@@ -59,7 +59,7 @@ namespace Repository.DAO
             try
             {
                 smtpClient.Send(message);
-                status = "Envio de correo realizado con exito, staus : OK ";
+                status = "Envio de correo realizado con exito staus : OK ";
 
             }
             catch (SmtpException e)

@@ -12,6 +12,6 @@ namespace Service.IServices
         List<Persona> ObtenerLista();
         List<EmpleadosVM> ObtenerEmpleado();
 
-        string SendMail();
+        string SendMail(string email, string secret);
     }
 }

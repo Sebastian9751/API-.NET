@@ -41,21 +41,17 @@ namespace Service.Services
             return personas;
         }
 
-        public string SendMail()
+        public string SendMail(string email, string secret)
         {
             Boolean result;
             string status = "";
 
-
-            string fromE = "stevewarz97@gmail.com";
-            string toE = "stevewarz97@gmail.com";
-            string secret = "mdwvabkxltfbwqdz";
-            MailMessage message = new MailMessage(fromE, toE, "Hello", "World");
+            MailMessage message = new MailMessage(email, email, "Hello", "World");
             message.IsBodyHtml = true;
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential(fromE, secret);
+            smtpClient.Credentials = new NetworkCredential(email, secret);
 
             try
             {

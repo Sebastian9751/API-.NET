@@ -6,6 +6,8 @@ using Service.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +41,41 @@ namespace Service.Services
             return personas;
         }
 
-       
+        public string SendMail()
+        {
+            Boolean result;
+            string status = "";
+
+
+            string fromE = "stevewarz97@gmail.com";
+            string toE = "stevewarz97@gmail.com";
+            string secret = "mdwvabkxltfbwqdz";
+            MailMessage message = new MailMessage(fromE, toE, "Hello", "World");
+            message.IsBodyHtml = true;
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential(fromE, secret);
+
+            try
+            {
+                smtpClient.Send(message);
+                result = true;
+                status = "Email sent successfully = " + result;
+            
+            }
+            catch (SmtpException e)
+            {
+                _logger.LogError(e.Message);
+                
+            }
+
+            smtpClient.Dispose();
+
+
+
+            return status;
+        }
 
         List<EmpleadosVM> IPersona.ObtenerEmpleado()
         {

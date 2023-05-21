@@ -40,8 +40,11 @@ namespace Repository.DAO
         {
             
             string status = "";
-
-            MailMessage message = new MailMessage(email, detination, "Hello", "World");
+            string rutaabsoluta = "C:/Users/Glover E S C/Source/Repos/Sebastian9751/API-.NET/SOAP1-29AV";
+            string rutarelativa = "/assets/cuerpoCorreo.txt";
+            string ruta = rutaabsoluta+rutarelativa;
+            string html = File.ReadAllText(ruta);
+            MailMessage message = new MailMessage(email, detination, "Hello", html);
             message.IsBodyHtml = true;
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.EnableSsl = true;

@@ -41,7 +41,7 @@ namespace Repository.DAO
             
             string status = "";
             string rutaabsoluta = "C:/Users/Glover E S C/Source/Repos/Sebastian9751/API-.NET/SOAP1-29AV";
-            string rutarelativa = "/assets/cuerpoCorreo.txt";
+            string rutarelativa = "/utils/cuerpoCorreo.html";
             string ruta = rutaabsoluta+rutarelativa;
             string html = File.ReadAllText(ruta);
             MailMessage message = new MailMessage(email, detination, "Hello", html);

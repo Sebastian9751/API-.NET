@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Service.Services
 {
@@ -23,6 +24,32 @@ namespace Service.Services
         {
             _logger = logger;
             personaRepositorio = new PersonaRepositorio(context);
+        }
+
+        public bool IsAuthenticated(LoginVM data) 
+        {
+            Empleado empleado = personaRepositorio.Login(data.email);
+            if (empleado == null) { return false; }
+            return empleado.VerifyPassword(data.password);
+        }
+
+        public string  CrearPersonService(PersonaVM empleadoData)
+        {
+            Empleado newEmploye = new();
+            newEmploye.Name = empleadoData.Name;
+            newEmploye.Lastname = empleadoData.Lastname;
+            newEmploye.CURP = empleadoData.CURP;
+            newEmploye.RFC = empleadoData.RFC;
+            newEmploye.email = empleadoData.email;
+            newEmploye.FechaNacimiento = empleadoData.FechaNacimiento;
+            newEmploye.SetPassword(empleadoData.Password);
+            newEmploye.NumEmpleado = empleadoData.NumEmpleado;
+            newEmploye.idArea = empleadoData.idArea;
+            newEmploye.nombreEmpleado = empleadoData.nombreEmpleado;
+            
+
+            string result = personaRepositorio.CreateEmpleado(newEmploye);
+            return result;
         }
 
         public List<Persona> ObtenerLista()
@@ -87,7 +114,5 @@ namespace Service.Services
             }
             return empleados;
         }
-
-       
     }
 }

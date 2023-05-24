@@ -10,36 +10,41 @@ namespace Repository.DAO
     public class PersonaRepositorio
     {
         private readonly ApplicationDbContext _context;
-        
+
 
         public PersonaRepositorio(ApplicationDbContext context)
         {
             _context = context;
-            
+
         }
 
         public Empleado Login(string email)
         {
-          
-             Empleado employe = _context.Empleados.FirstOrDefault(p => p.email == email) ?? new Empleado();
-             return employe;
-            
-            
+            Empleado employe = _context.Empleados.FirstOrDefault(p => p.email == email) ?? new Empleado();
+            return employe;
         }
 
-        public string CreateEmpleado(Empleado newPerson)
+        public string CreateEmpleado(Empleado employe)
         {
-            Console.WriteLine(newPerson);
-            _context.Empleados.Add(newPerson);
-            _context.SaveChanges();
-            return "todo bien";
+            try
+            {
+                _context.Empleados.Add(employe);
+                _context.SaveChanges();
+                return "todo bien";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return $"Usuario no creado {ex.Message}";
+            }
+
         }
-       
+
 
         public List<Persona> ObtenerLista()
         {
             List<Persona> lista = new List<Persona>();
-            lista = _context.Personas.ToList(); 
+            lista = _context.Personas.ToList();
             return lista;
 
         }
@@ -47,13 +52,13 @@ namespace Repository.DAO
         public List<Empleado> ObtenerEmpleados()
         {
             List<Empleado> lis = new List<Empleado>();
-            lis = _context.Empleados.Include(x=>x.Area).ToList();
+            lis = _context.Empleados.Include(x => x.Area).ToList();
             return lis;
         }
 
-        public string sedEmail(string email,string secret, string detination)
+        public string sedEmail(string email, string secret, string detination)
         {
-            
+
             string status = "";
 
             MailMessage message = new MailMessage(email, detination, "Hello", "World");
@@ -71,7 +76,7 @@ namespace Repository.DAO
             }
             catch (SmtpException e)
             {
-               
+
                 status = "Parece que hubo un error en la solicitud: \n" + e.Message;
 
             }
@@ -83,6 +88,6 @@ namespace Repository.DAO
             return status;
 
         }
-            
+
     }
 }

@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Service.Services
 {
@@ -32,23 +33,23 @@ namespace Service.Services
             return empleado.VerifyPassword(data.password);
         }
 
-        public string  CrearPersonService()
+        public string  CrearPersonService(PersonaVM empleadoData)
         {
-            Empleado persona = new();
-            persona.Name = "manuel";
-            persona.Lastname = "garcia";
-            persona.CURP = "dfvdf46v5";
-            persona.RFC = "fd55454ed";
-            persona.email = "langelxobl@gmail.com";
-            persona.FechaNacimiento = DateTime.Now;
-            persona.SetPassword("password");
-            persona.NumEmpleado = 3;
-            persona.idArea = 1;
-            persona.nombreEmpleado = "sdcsdq amsk";
+            Empleado newEmploye = new();
+            newEmploye.Name = empleadoData.Name;
+            newEmploye.Lastname = empleadoData.Lastname;
+            newEmploye.CURP = empleadoData.CURP;
+            newEmploye.RFC = empleadoData.RFC;
+            newEmploye.email = empleadoData.email;
+            newEmploye.FechaNacimiento = empleadoData.FechaNacimiento;
+            newEmploye.SetPassword(empleadoData.Password);
+            newEmploye.NumEmpleado = empleadoData.NumEmpleado;
+            newEmploye.idArea = empleadoData.idArea;
+            newEmploye.nombreEmpleado = empleadoData.nombreEmpleado;
             
 
-            personaRepositorio.CreateEmpleado(persona);
-            return "usuario creado";
+            string result = personaRepositorio.CreateEmpleado(newEmploye);
+            return result;
         }
 
         public List<Persona> ObtenerLista()

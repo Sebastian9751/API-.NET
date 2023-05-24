@@ -25,6 +25,32 @@ namespace Service.Services
             personaRepositorio = new PersonaRepositorio(context);
         }
 
+        public bool IsAuthenticated(LoginVM data) 
+        {
+            Empleado empleado = personaRepositorio.Login(data.email);
+            if (empleado == null) { return false; }
+            return empleado.VerifyPassword(data.password);
+        }
+
+        public string  CrearPersonService()
+        {
+            Empleado persona = new();
+            persona.Name = "manuel";
+            persona.Lastname = "garcia";
+            persona.CURP = "dfvdf46v5";
+            persona.RFC = "fd55454ed";
+            persona.email = "langelxobl@gmail.com";
+            persona.FechaNacimiento = DateTime.Now;
+            persona.SetPassword("password");
+            persona.NumEmpleado = 3;
+            persona.idArea = 1;
+            persona.nombreEmpleado = "sdcsdq amsk";
+            
+
+            personaRepositorio.CreateEmpleado(persona);
+            return "usuario creado";
+        }
+
         public List<Persona> ObtenerLista()
         {
             List<Persona> personas = new List<Persona>();
@@ -87,7 +113,5 @@ namespace Service.Services
             }
             return empleados;
         }
-
-       
     }
 }

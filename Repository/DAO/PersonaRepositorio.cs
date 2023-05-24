@@ -18,12 +18,27 @@ namespace Repository.DAO
             
         }
 
+        public Empleado Login(string email)
+        {
+          
+             Empleado employe = _context.Empleados.FirstOrDefault(p => p.email == email) ?? new Empleado();
+             return employe;
+            
+            
+        }
+
+        public string CreateEmpleado(Empleado newPerson)
+        {
+            Console.WriteLine(newPerson);
+            _context.Empleados.Add(newPerson);
+            _context.SaveChanges();
+            return "todo bien";
+        }
        
 
         public List<Persona> ObtenerLista()
         {
             List<Persona> lista = new List<Persona>();
-    
             lista = _context.Personas.ToList(); 
             return lista;
 

@@ -6,6 +6,8 @@ namespace Service.IServices
         List<Persona> ObtenerLista();
         List<EmpleadosVM> ObtenerEmpleado();
 
+        List<Items> ObtenerItemsDisponibles();
+
 
         List<string> sendMessage(string email, string secret);
     }

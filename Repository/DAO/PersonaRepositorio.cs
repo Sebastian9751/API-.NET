@@ -29,6 +29,16 @@ namespace Repository.DAO
 
         }
 
+
+        public List<Items> ObtenerItemsDis()
+        {
+            List<Items> lista = new List<Items>();
+
+            lista = _context.Items.ToList();
+            return lista;
+
+        }
+
         public List<Empleado> ObtenerEmpleados()
         {
             List<Empleado> lis = new List<Empleado>();

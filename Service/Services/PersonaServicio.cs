@@ -25,6 +25,23 @@ namespace Service.Services
             personaRepositorio = new PersonaRepositorio(context);
         }
 
+        public List<Items> ObtenerItemsDisponibles()
+        {
+            List<Items> items = new List<Items>();
+
+            try
+            {
+                items = personaRepositorio.ObtenerItemsDis().Where(x => x.status == true).ToList();
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return items;
+        }
+
         public List<Persona> ObtenerLista()
         {
             List<Persona> personas = new List<Persona>();

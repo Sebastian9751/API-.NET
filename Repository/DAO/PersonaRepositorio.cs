@@ -32,7 +32,7 @@ namespace Repository.DAO
         public List<Empleado> ObtenerEmpleados()
         {
             List<Empleado> lis = new List<Empleado>();
-            lis = _context.Empleados.Include(x=>x.Area).ToList();
+            lis = _context.Empleados.Include(x=>x.Item).ToList();
             return lis;
         }
 

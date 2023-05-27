@@ -76,9 +76,14 @@ namespace Service.Services
                 {
                     Nombre = x.Name,
                     Apellidos = x.Lastname,
-                    Area = x.Area.Nombre,
+                    
                     Email = x.email,
-                    NumEmpleado = x.NumEmpleado
+                    NumEmpleado = x.NumEmpleado,
+                    ItemId= x.ItemId,
+                    ItemName = x.Item.NombreItem,
+                    ItemDesc = x.Item.Description,
+
+                    
                 }).ToList();
             }
             catch (Exception e)

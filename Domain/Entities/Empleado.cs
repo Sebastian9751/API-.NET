@@ -16,6 +16,10 @@ namespace Domain.Entities
         public int idArea { get; set; }
         public virtual Area Area { get; set; }
         public string nombreEmpleado { get; set; }
+        [ForeignKey("Item")]
+        public int ItemId { get; set; }
+        public virtual Items Item { get; set; }
+        
 
     }
 }

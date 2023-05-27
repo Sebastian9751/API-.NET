@@ -12,6 +12,9 @@ namespace Domain.Entities
         public string Apellidos { get; set; }
         public string Email { get; set; }
         public int NumEmpleado { get; set; }
-        public string Area { get; set; }
+        public int ItemId { get; set; }
+        public string ItemName { get; set; }
+        public string ItemDesc { get; set; }
+
     }
 }

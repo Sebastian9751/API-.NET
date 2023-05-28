@@ -111,5 +111,17 @@ namespace Service.Services
         }
 
        
+
+        public void GuardarEmpleados(Persona empleado)
+        {
+            try
+            {
+                personaRepositorio.GuardarEmpleados(empleado);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+        }
     }
 }

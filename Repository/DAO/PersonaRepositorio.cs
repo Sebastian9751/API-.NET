@@ -78,6 +78,22 @@ namespace Repository.DAO
             return status;
 
         }
-            
+
+        public void GuardarEmpleados(Persona empleados)
+        {
+            try
+            {
+                _context.Personas.AddRange(empleados);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                // Manejar la excepción según sea necesario
+                throw e;
+            }
+        }
+
+
+
     }
 }

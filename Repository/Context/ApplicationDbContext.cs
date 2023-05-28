@@ -9,7 +9,7 @@ namespace Repository.Context
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<Area> Area { get; set; }
         public virtual DbSet<Empleado> Empleados { get; set; }
-        public virtual DbSet<Items> Items { get; set; }
+        public virtual DbSet<Items> Items { get; set; } 
         public ApplicationDbContext(DbContextOptions options): base(options) 
         {
             

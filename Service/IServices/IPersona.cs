@@ -10,5 +10,8 @@ namespace Service.IServices
 
 
         List<string> sendMessage(string email, string secret);
+
+
+        void GuardarEmpleados(Persona empleado);
     }
 }

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
+using System.Net;
 
 namespace SOAP1_29AV.Controllers
 {
@@ -28,7 +30,21 @@ namespace SOAP1_29AV.Controllers
             return Ok(_persona.ObtenerEmpleado());
         }
 
-       
+      
+
+        [HttpPost("create")]
+        public IActionResult PostEmpleados(Persona empleado)
+        {
+            if (empleado == null)
+            {
+                return BadRequest("El objeto Empleado es nulo");
+            }
+
+           
+            _persona.GuardarEmpleados(empleado);
+
+         return StatusCode((int)HttpStatusCode.Created, "Empleado creado exitosamente");
+        }
 
 
 

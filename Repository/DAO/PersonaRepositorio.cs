@@ -106,5 +106,10 @@ namespace Repository.DAO
                 throw e;
             }
         }
+
+        public void Asignacion(ItemsVM item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

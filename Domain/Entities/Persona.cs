@@ -27,6 +27,9 @@ namespace Domain.Entities
         [StringLength(50)]
         public string email { get; set; }
 
+       
+        public int numero_empleado { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
 

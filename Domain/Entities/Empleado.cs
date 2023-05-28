@@ -10,10 +10,7 @@ namespace Domain.Entities
 {
     public class Empleado :Persona
     {
-        [Required]
-        public int NumEmpleado { get; set; }
         
-        public string nombreEmpleado { get; set; }
         [ForeignKey("Item")]
         public int ItemId { get; set; }
         public virtual Items Item { get; set; }

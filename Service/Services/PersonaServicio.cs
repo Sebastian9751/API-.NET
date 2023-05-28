@@ -95,7 +95,7 @@ namespace Service.Services
                     Apellidos = x.Lastname,
                     
                     Email = x.email,
-                    NumEmpleado = x.NumEmpleado,
+                    NumEmpleado = x.numero_empleado,
                     ItemId= x.ItemId,
                     ItemName = x.Item.NombreItem,
                     ItemDesc = x.Item.Description,
@@ -129,6 +129,18 @@ namespace Service.Services
             try
             {
                 personaRepositorio.GuardarItem(item);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+        }
+
+        public void AsignarItem(ItemsVM item)
+        {
+            try
+            {
+                personaRepositorio.Asignacion(item);
             }
             catch (Exception e)
             {

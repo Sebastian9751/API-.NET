@@ -15,5 +15,7 @@ namespace Service.IServices
         void GuardarEmpleados(Persona empleado);
 
         void GuardarItem(Items item);
+
+        void AsignarItem(ItemsVM  asignacion);
     }
 }

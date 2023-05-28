@@ -11,13 +11,18 @@ namespace Domain.Entities
     [Table("Items")]
     public class Items
     {
-
         [Key]
         public int id { get; set; }
+
         [Required]
         public string NombreItem { get; set; }
+
         public string Description { get; set; }
+
+        public DateTime FechaAsignacion { get; set; }
+
+        public DateTime FechaEntrega { get; set; }
+
         public bool status { get; set; }
-       
     }
 }

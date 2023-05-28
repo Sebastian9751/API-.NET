@@ -123,5 +123,17 @@ namespace Service.Services
                 _logger.LogError(e.Message);
             }
         }
+
+        public void GuardarItem(Items item)
+        {
+            try
+            {
+                personaRepositorio.GuardarItem(item);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+        }
     }
 }

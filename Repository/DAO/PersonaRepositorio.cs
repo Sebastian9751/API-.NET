@@ -93,7 +93,18 @@ namespace Repository.DAO
             }
         }
 
-
-
+        public void GuardarItem(Items item)
+        {
+            try
+            {
+                _context.Items.AddRange(item);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                // Manejar la excepción según sea necesario
+                throw e;
+            }
+        }
     }
 }

@@ -12,9 +12,7 @@ namespace Domain.Entities
     {
         [Required]
         public int NumEmpleado { get; set; }
-        [ForeignKey("Area")]
-        public int idArea { get; set; }
-        public virtual Area Area { get; set; }
+        
         public string nombreEmpleado { get; set; }
         [ForeignKey("Item")]
         public int ItemId { get; set; }

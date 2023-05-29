@@ -29,8 +29,12 @@ namespace SOAP1_29AV.Controllers
 
             return Ok(_persona.ObtenerEmpleado());
         }
+        [HttpGet("EmpladoItemsFechaProxima")]
+        public IActionResult getPesonaItem()
+        {
 
-      
+            return Ok(_persona.ObtenerEmpleadoItem());
+        }
 
         [HttpPost("create")]
         public IActionResult PostEmpleados(Persona empleado)
@@ -45,8 +49,5 @@ namespace SOAP1_29AV.Controllers
 
          return StatusCode((int)HttpStatusCode.Created, "Empleado creado exitosamente");
         }
-
-
-
     }
 }

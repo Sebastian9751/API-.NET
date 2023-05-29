@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
 
 namespace SOAP1_29AV.Controllers
@@ -24,9 +25,16 @@ namespace SOAP1_29AV.Controllers
             string contrasena = _configuration.GetSection("EmailConfig:secret").Value;
             return Ok(_persona.sendMessage(correo,contrasena));
         }
-
-
-
-
+        [HttpPost("envioAuto")]
+        public IActionResult sendEmail(email email) 
+        {
+            if (email == null)
+            {
+                return BadRequest("El objeto Item es nulo");
+            }
+            string correo = _configuration.GetSection("EmailConfig:email").Value;
+            string contrasena = _configuration.GetSection("EmailConfig:secret").Value;
+            return Ok(_persona.sendMessageRemember(correo, contrasena, email.emaildestino));
+        }
     }
 }

@@ -82,7 +82,21 @@ namespace Service.Services
             return emails;
         }
 
-        
+        public List<string> sendMessageRemember(string email, string secret, string destination)
+        {
+            List<string> emails = new List<string>();
+            try
+            {
+                personaRepositorio.sedEmail(email, secret, destination);
+                emails.Add("Correo enviado a :" + destination);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return emails;
+        }
 
         List<EmpleadosVM> IPersona.ObtenerEmpleado()
         {
@@ -110,7 +124,36 @@ namespace Service.Services
             return empleados;
         }
 
-       
+        List<EmpleadosVM> IPersona.ObtenerEmpleadoItem()
+        {
+            List<EmpleadosVM> empleados = new List<EmpleadosVM>();
+            try
+            {
+                empleados = personaRepositorio.ObtenerEmpleados().Select(x => new EmpleadosVM()
+                {
+                    Nombre = x.Name,
+                    Apellidos = x.Lastname,
+
+                    Email = x.email,
+                    NumEmpleado = x.numero_empleado,
+                    ItemId = x.ItemId,
+                    ItemName = x.Item.NombreItem,
+                    ItemDesc = x.Item.Description,
+                    DateAsign = x.Item.FechaAsignacion,
+                    DateReturn = x.Item.FechaEntrega
+
+                }).ToList();
+                DateTime fechaActual = DateTime.Now;
+                empleados = empleados.Where(e => (e.DateReturn - fechaActual).TotalDays <= 2).ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return empleados;
+        }
+
+
 
         public void GuardarEmpleados(Persona empleado)
         {

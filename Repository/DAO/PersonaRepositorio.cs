@@ -128,5 +128,18 @@ namespace Repository.DAO
             }
         }
 
+        public void SetStatusItem(bool status, int id_item)
+        {
+            var item = _context.Items.Find(id_item);
+            if (item == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
+
+            item.status = status;
+            _context.Items.Update(item);
+            _context.SaveChanges();
+        }
     }
 }

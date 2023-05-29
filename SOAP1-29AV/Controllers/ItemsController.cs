@@ -49,5 +49,21 @@ namespace SOAP1_29AV.Controllers
             return StatusCode((int)HttpStatusCode.Created, "Item creado exitosamente");
         }
 
+        [HttpPut("setStatusItem")]
+        public IActionResult SetStatusItem(bool status, int id_item)
+        {
+            if (status == null || id_item== null)
+            {
+                return BadRequest("El campo es nulo");
+            }
+
+
+            _persona.SetStatusItem(status,id_item) ;
+
+            return StatusCode((int)HttpStatusCode.Created, "Item actualizado exitosamente");
+        }
+
+
+
     }
 }

@@ -17,5 +17,7 @@ namespace Service.IServices
         void GuardarItem(Items item);
 
         void AsignarItem(ItemsVM  asignacion);
+
+        void SetStatusItem(bool status, int id_item);
     }
 }

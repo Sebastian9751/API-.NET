@@ -135,5 +135,17 @@ namespace Service.Services
                 _logger.LogError(e.Message);
             }
         }
+
+        public void SetStatusItem(bool status, int id_item)
+        {
+            try
+            {
+                personaRepositorio.SetStatusItem(status, id_item);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+        }
     }
 }

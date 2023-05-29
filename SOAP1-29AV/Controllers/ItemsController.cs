@@ -49,7 +49,7 @@ namespace SOAP1_29AV.Controllers
             return StatusCode((int)HttpStatusCode.Created, "Item creado exitosamente");
         }
 
-        [HttpPut("setStatusItem")]
+        [HttpPut("StatusItem")]
         public IActionResult SetStatusItem(bool status, int id_item)
         {
             if (status == null || id_item== null)

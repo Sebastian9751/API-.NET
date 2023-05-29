@@ -4,7 +4,7 @@ namespace Service.IServices
     public interface IPersona
     {
         List<Persona> ObtenerLista();
-        List<EmpleadosVM> ObtenerEmpleado();
+        List<Asignaciones> ObtenerEmpleado();
 
         List<Items> ObtenerItemsDisponibles();
 

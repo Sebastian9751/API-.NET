@@ -39,10 +39,10 @@ namespace Repository.DAO
 
         }
 
-        public List<Empleado> ObtenerEmpleados()
+        public List<Asignaciones> ObtenerEmpleados()
         {
-            List<Empleado> lis = new List<Empleado>();
-            lis = _context.Empleados.Include(x=>x.Item).ToList();
+            List<Asignaciones> lis = new List<Asignaciones>();
+            lis = _context.Asignaciones.ToList();
             return lis;
         }
 
@@ -127,5 +127,6 @@ namespace Repository.DAO
                 throw e;
             }
         }
+
     }
 }

@@ -84,24 +84,12 @@ namespace Service.Services
 
         
 
-        List<EmpleadosVM> IPersona.ObtenerEmpleado()
+        List<Asignaciones> IPersona.ObtenerEmpleado()
         {
-            List<EmpleadosVM> empleados = new List<EmpleadosVM>();
+            List<Asignaciones> empleados = new List<Asignaciones>();
             try
             {
-                empleados = personaRepositorio.ObtenerEmpleados().Select(x => new EmpleadosVM()
-                {
-                    Nombre = x.Name,
-                    Apellidos = x.Lastname,
-                    
-                    Email = x.email,
-                    NumEmpleado = x.numero_empleado,
-                    ItemId= x.ItemId,
-                    ItemName = x.Item.NombreItem,
-                    ItemDesc = x.Item.Description,
-
-                    
-                }).ToList();
+                empleados = personaRepositorio.ObtenerEmpleados();
             }
             catch (Exception e)
             {

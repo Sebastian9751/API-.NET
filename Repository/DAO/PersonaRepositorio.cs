@@ -109,7 +109,23 @@ namespace Repository.DAO
 
         public void Asignacion(ItemsVM item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Asignaciones.Add(new Asignaciones
+                {
+                    id_item = item.ItemId,
+                    id_persona = item.id_persona,
+                    dia_asignacion = item.dia_asignacion,
+                    dia_liberacion = item.dia_liberacion,
+                    dia_entrega = item.dia_entrega
+                });
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                // Manejar la excepción según sea necesario
+                throw e;
+            }
         }
     }
 }

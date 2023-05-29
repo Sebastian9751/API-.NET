@@ -35,5 +35,19 @@ namespace SOAP1_29AV.Controllers
             return StatusCode((int)HttpStatusCode.Created, "Item creado exitosamente");
         }
 
+        [HttpPost("asignar")]
+        public IActionResult AsignarItem(ItemsVM item)
+        {
+            if (item == null)
+            {
+                return BadRequest("El objeto Item es nulo");
+            }
+
+
+            _persona.AsignarItem(item);
+
+            return StatusCode((int)HttpStatusCode.Created, "Item creado exitosamente");
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Context;
 
@@ -11,9 +12,11 @@ using Repository.Context;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230529200550_tableAsignaciones")]
+    partial class tableAsignaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,38 +24,6 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Asignaciones", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<DateTime>("dia_asignacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("dia_entrega")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("dia_liberacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("id_item")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_persona")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("id_item");
-
-                    b.HasIndex("id_persona");
-
-                    b.ToTable("Asignaciones");
-                });
 
             modelBuilder.Entity("Domain.Entities.Items", b =>
                 {
@@ -148,25 +119,6 @@ namespace Repository.Migrations
                     b.ToTable("Personas");
 
                     b.HasDiscriminator().HasValue("Empleado");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Asignaciones", b =>
-                {
-                    b.HasOne("Domain.Entities.Items", "Items")
-                        .WithMany()
-                        .HasForeignKey("id_item")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Persona", "Persona")
-                        .WithMany()
-                        .HasForeignKey("id_persona")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Items");
-
-                    b.Navigation("Persona");
                 });
 
             modelBuilder.Entity("Domain.Entities.Empleado", b =>

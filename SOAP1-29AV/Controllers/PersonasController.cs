@@ -29,8 +29,15 @@ namespace SOAP1_29AV.Controllers
 
             return Ok(_persona.ObtenerEmpleado());
         }
+        [HttpGet("empleadosItemsById")]
 
-      
+        public IActionResult getPesonaById(int id)
+        {
+
+            return Ok(_persona.ObtenerEmpleadosById(id));
+        }
+
+
 
         [HttpPost("create")]
         public IActionResult PostEmpleados(Persona empleado)

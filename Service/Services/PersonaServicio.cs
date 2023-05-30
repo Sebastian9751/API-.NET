@@ -97,8 +97,21 @@ namespace Service.Services
             }
             return empleados;
         }
+        public List<Asignaciones> ObtenerEmpleadosById(int id)
+        {
+            List<Asignaciones> empleados = new List<Asignaciones>();
+            try
+            {
+                empleados = personaRepositorio.ObtenerEmpleadosById(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return empleados;
+        }
 
-       
+
 
         public void GuardarEmpleados(Persona empleado)
         {
@@ -147,5 +160,7 @@ namespace Service.Services
                 _logger.LogError(e.Message);
             }
         }
+
+        
     }
 }

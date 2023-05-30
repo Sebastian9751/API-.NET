@@ -26,6 +26,8 @@ namespace Domain.Entities
         public DateTime dia_liberacion { get; set; }
         public virtual Persona Persona { get; set; }
         public virtual Items Items { get; set; }
+
+        
     }
 
 }

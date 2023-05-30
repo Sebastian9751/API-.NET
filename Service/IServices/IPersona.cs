@@ -6,6 +6,8 @@ namespace Service.IServices
         List<Persona> ObtenerLista();
         List<Asignaciones> ObtenerEmpleado();
 
+        List<Asignaciones> ObtenerEmpleadosById(int id);
+
         List<Items> ObtenerItemsDisponibles();
 
 

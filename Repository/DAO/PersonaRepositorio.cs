@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using System.Net.Mail;
 using System.Net;
-
+using Microsoft.Extensions.Logging;
 
 namespace Repository.DAO
 {
@@ -41,9 +41,46 @@ namespace Repository.DAO
 
         public List<Asignaciones> ObtenerEmpleados()
         {
-            List<Asignaciones> lis = new List<Asignaciones>();
-            lis = _context.Asignaciones.ToList();
-            return lis;
+            List<Asignaciones> empleados = new List<Asignaciones>();
+           
+                empleados = (from asignacion in _context.Asignaciones
+                             join item in _context.Items on asignacion.id_item equals item.id
+
+                             select new Asignaciones
+                             {
+                                 id = asignacion.id,
+                                 id_persona = asignacion.id_persona,
+                                 id_item = asignacion.id_item,
+                                 dia_asignacion = asignacion.dia_asignacion,
+                                 dia_entrega = asignacion.dia_entrega,
+                                 dia_liberacion = asignacion.dia_liberacion,
+                                 Persona = asignacion.Persona,
+                                 Items = item
+                             }).ToList();
+            
+            return empleados;
+        }
+
+        public List<Asignaciones> ObtenerEmpleadosById(int id)
+        {
+            List<Asignaciones> empleados = new List<Asignaciones>();
+
+            empleados = (from asignacion in _context.Asignaciones
+                         join item in _context.Items on asignacion.id_item equals item.id
+                         where asignacion.id_persona == id
+                         select new Asignaciones
+                         {
+                             id = asignacion.id,
+                             id_persona = asignacion.id_persona,
+                             id_item = asignacion.id_item,
+                             dia_asignacion = asignacion.dia_asignacion,
+                             dia_entrega = asignacion.dia_entrega,
+                             dia_liberacion = asignacion.dia_liberacion,
+                             Persona = asignacion.Persona,
+                             Items = item
+                         }).ToList();
+
+            return empleados;
         }
 
         public string sedEmail(string email,string secret, string detination)

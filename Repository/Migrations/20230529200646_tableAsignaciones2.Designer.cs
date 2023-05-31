@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Context;
 
@@ -11,9 +12,11 @@ using Repository.Context;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230529200646_tableAsignaciones2")]
+    partial class tableAsignaciones2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,26 +33,26 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("dia_asignacion")
+                    b.Property<DateTime>("assignment_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("dia_entrega")
+                    b.Property<DateTime>("delivery_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("dia_liberacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("id_item")
+                    b.Property<int>("id_activo")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_persona")
+                    b.Property<int>("id_empleoyee")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("release_date")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("id");
 
-                    b.HasIndex("id_item");
+                    b.HasIndex("id_activo");
 
-                    b.HasIndex("id_persona");
+                    b.HasIndex("id_empleoyee");
 
                     b.ToTable("Asignaciones");
                 });
@@ -65,6 +68,12 @@ namespace Repository.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaAsignacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaEntrega")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NombreItem")
                         .IsRequired()
@@ -148,13 +157,13 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Domain.Entities.Items", "Items")
                         .WithMany()
-                        .HasForeignKey("id_item")
+                        .HasForeignKey("id_activo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("id_persona")
+                        .HasForeignKey("id_empleoyee")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

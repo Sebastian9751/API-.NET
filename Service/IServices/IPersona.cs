@@ -4,9 +4,15 @@ namespace Service.IServices
     public interface IPersona
     {
         List<Persona> ObtenerLista();
-        List<EmpleadosVM> ObtenerEmpleado();
-        List<EmpleadosVM> ObtenerEmpleadoItem();
 
+        List<EmpleadosVM> ObtenerEmpleado();
+      
+        List<EmpleadosVM> ObtenerEmpleadoItem();
+      
+        List<Asignaciones> ObtenerEmpleado();
+
+        List<Asignaciones> ObtenerEmpleadosById(int id);
+      
         List<Items> ObtenerItemsDisponibles();
 
 
@@ -19,5 +25,7 @@ namespace Service.IServices
         void GuardarItem(Items item);
 
         void AsignarItem(ItemsVM  asignacion);
+
+        void SetStatusItem(bool status, int id_item);
     }
 }

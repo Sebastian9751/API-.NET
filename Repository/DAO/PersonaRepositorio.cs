@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using System.Net.Mail;
 using System.Net;
-
+using Microsoft.Extensions.Logging;
 
 namespace Repository.DAO
 {
@@ -39,11 +39,48 @@ namespace Repository.DAO
 
         }
 
-        public List<Empleado> ObtenerEmpleados()
+        public List<Asignaciones> ObtenerEmpleados()
         {
-            List<Empleado> lis = new List<Empleado>();
-            lis = _context.Empleados.Include(x=>x.Item).ToList();
-            return lis;
+            List<Asignaciones> empleados = new List<Asignaciones>();
+           
+                empleados = (from asignacion in _context.Asignaciones
+                             join item in _context.Items on asignacion.id_item equals item.id
+
+                             select new Asignaciones
+                             {
+                                 id = asignacion.id,
+                                 id_persona = asignacion.id_persona,
+                                 id_item = asignacion.id_item,
+                                 dia_asignacion = asignacion.dia_asignacion,
+                                 dia_entrega = asignacion.dia_entrega,
+                                 dia_liberacion = asignacion.dia_liberacion,
+                                 Persona = asignacion.Persona,
+                                 Items = item
+                             }).ToList();
+            
+            return empleados;
+        }
+
+        public List<Asignaciones> ObtenerEmpleadosById(int id)
+        {
+            List<Asignaciones> empleados = new List<Asignaciones>();
+
+            empleados = (from asignacion in _context.Asignaciones
+                         join item in _context.Items on asignacion.id_item equals item.id
+                         where asignacion.id_persona == id
+                         select new Asignaciones
+                         {
+                             id = asignacion.id,
+                             id_persona = asignacion.id_persona,
+                             id_item = asignacion.id_item,
+                             dia_asignacion = asignacion.dia_asignacion,
+                             dia_entrega = asignacion.dia_entrega,
+                             dia_liberacion = asignacion.dia_liberacion,
+                             Persona = asignacion.Persona,
+                             Items = item
+                         }).ToList();
+
+            return empleados;
         }
 
         public string sedEmail(string email,string secret, string detination)
@@ -110,7 +147,37 @@ namespace Repository.DAO
 
         public void Asignacion(ItemsVM item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Asignaciones.Add(new Asignaciones
+                {
+                    id_item = item.ItemId,
+                    id_persona = item.id_persona,
+                    dia_asignacion = item.dia_asignacion,
+                    dia_liberacion = item.dia_liberacion,
+                    dia_entrega = item.dia_entrega
+                });
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                // Manejar la excepción según sea necesario
+                throw e;
+            }
+        }
+
+        public void SetStatusItem(bool status, int id_item)
+        {
+            var item = _context.Items.Find(id_item);
+            if (item == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
+
+            item.status = status;
+            _context.Items.Update(item);
+            _context.SaveChanges();
         }
     }
 }

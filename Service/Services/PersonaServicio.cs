@@ -98,24 +98,25 @@ namespace Service.Services
             return emails;
         }
 
-        List<EmpleadosVM> IPersona.ObtenerEmpleado()
+        List<Asignaciones> IPersona.ObtenerEmpleado()
         {
-            List<EmpleadosVM> empleados = new List<EmpleadosVM>();
+            List<Asignaciones> empleados = new List<Asignaciones>();
             try
             {
-                empleados = personaRepositorio.ObtenerEmpleados().Select(x => new EmpleadosVM()
-                {
-                    Nombre = x.Name,
-                    Apellidos = x.Lastname,
-                    
-                    Email = x.email,
-                    NumEmpleado = x.numero_empleado,
-                    ItemId= x.ItemId,
-                    ItemName = x.Item.NombreItem,
-                    ItemDesc = x.Item.Description,
-
-                    
-                }).ToList();
+                empleados = personaRepositorio.ObtenerEmpleados();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return empleados;
+        }
+        public List<Asignaciones> ObtenerEmpleadosById(int id)
+        {
+            List<Asignaciones> empleados = new List<Asignaciones>();
+            try
+            {
+                empleados = personaRepositorio.ObtenerEmpleadosById(id);
             }
             catch (Exception e)
             {
@@ -153,8 +154,6 @@ namespace Service.Services
             return empleados;
         }
 
-
-
         public void GuardarEmpleados(Persona empleado)
         {
             try
@@ -190,5 +189,19 @@ namespace Service.Services
                 _logger.LogError(e.Message);
             }
         }
+
+        public void SetStatusItem(bool status, int id_item)
+        {
+            try
+            {
+                personaRepositorio.SetStatusItem(status, id_item);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+        }
+
+        
     }
 }

@@ -53,9 +53,12 @@ namespace SOAP1_29AV.Controllers
          return StatusCode((int)HttpStatusCode.Created, "Empleado creado exitosamente");
         }
 
+        [HttpGet("EmpladoItemsFechaProxima")]
+        public IActionResult getPesonaItem()
+        {
 
-
-
+            return Ok(_persona.ObtenerEmpleado());
+        }
 
     }
 }

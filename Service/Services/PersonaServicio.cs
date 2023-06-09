@@ -161,6 +161,22 @@ namespace Service.Services
             }
         }
 
-        
+        public List<string> sendMessageRemember(string email, string secret, string destination)
+        {
+            List<string> emails = new List<string>();
+            try
+            {
+                personaRepositorio.sedEmail(email, secret, destination);
+                emails.Add("Correo enviado a :" + destination);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return emails;
+        }
+
+
     }
 }

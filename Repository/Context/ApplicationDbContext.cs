@@ -8,7 +8,6 @@ namespace Repository.Context
     {
         public virtual DbSet<Persona> Personas { get; set; }
        
-        public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Items> Items { get; set; } 
         public virtual DbSet<Asignaciones> Asignaciones { get; set; }
         public ApplicationDbContext(DbContextOptions options): base(options) 

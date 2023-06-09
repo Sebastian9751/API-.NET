@@ -21,5 +21,7 @@ namespace Service.IServices
         void AsignarItem(ItemsVM  asignacion);
 
         void SetStatusItem(bool status, int id_item);
+
+        List<string> sendMessageRemember(string email, string secret, string destination);
     }
 }

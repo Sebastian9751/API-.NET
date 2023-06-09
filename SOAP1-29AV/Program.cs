@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddTransient<IPersona, PersonaServicio>();
-// Add services to the container.
+
 
 //CORS
 builder.Services.AddCors(options =>
@@ -21,8 +21,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy  =>
                       {
-                          policy.WithOrigins("http://localhost:5173",
-                                              "http://www.apisoanet.somee.com");
+                          policy.WithOrigins("*")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader() 
+                          ;
                       });
 });
 
@@ -41,8 +43,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
+
+app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 

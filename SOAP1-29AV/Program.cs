@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddTransient<IPersona, PersonaServicio>();
-// Add services to the container.
+
 
 //CORS
 builder.Services.AddCors(options =>

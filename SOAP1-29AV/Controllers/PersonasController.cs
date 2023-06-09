@@ -53,6 +53,14 @@ namespace SOAP1_29AV.Controllers
          return StatusCode((int)HttpStatusCode.Created, "Empleado creado exitosamente");
         }
 
+        [HttpPost("login")]
+
+        public IActionResult userLogin([FromBody] LoginVM loginData)
+        {
+            string res = _persona.login(loginData.email, loginData.password);
+            return Ok(res);
+        }
+
         [HttpGet("EmpladoItemsFechaProxima")]
         public IActionResult getPesonaItem()
         {

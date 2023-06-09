@@ -33,6 +33,9 @@ namespace Domain.Entities
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
 
+        [StringLength(80)]
+        public string password { get; set; }
+
 
     }
 }

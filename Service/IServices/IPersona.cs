@@ -12,6 +12,7 @@ namespace Service.IServices
 
 
         List<string> sendMessage(string email, string secret);
+        String login(string email, string password);
 
 
         void GuardarEmpleados(Persona empleado);

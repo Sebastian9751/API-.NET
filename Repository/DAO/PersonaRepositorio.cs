@@ -178,5 +178,11 @@ namespace Repository.DAO
             _context.Items.Update(item);
             _context.SaveChanges();
         }
+
+
+        public Persona GetPersona(string email)
+        {
+            return _context.Personas.FirstOrDefault(p => p.email == email) ?? new Persona();
+        }
     }
 }

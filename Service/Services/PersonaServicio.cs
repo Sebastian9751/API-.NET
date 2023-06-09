@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace Service.Services
 {
@@ -117,6 +118,9 @@ namespace Service.Services
         {
             try
             {
+                string pass = empleado.password;
+                string hashPass= HashPassword(pass);
+                empleado.password = hashPass;
                 personaRepositorio.GuardarEmpleados(empleado);
             }
             catch (Exception e)
@@ -176,7 +180,38 @@ namespace Service.Services
 
             return emails;
         }
+        // aqui logica para encryp la constraseña
+        public string login(string email, string password)
+        {
+            try {
+                Persona p = personaRepositorio.GetPersona(email);
+                if (p.Id ==0) { return "Correo no encontrado"; }
+                bool auth = VerifyPassword(password, p.password);
+                if (!auth) return "contraseña incorrecta";
 
+                return "login exitoso!!!";
+            }
+            catch(Exception e) {
+                return "Erro en login"; 
+            }
+        }
+        // hash password:
+        public static string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                string hash = Convert.ToBase64String(hashedBytes);
+                return hash;
+            }
+        }
 
+        // Verify password
+        public static bool VerifyPassword(string password, string hashedPassword)
+        {
+            string hashedInput = HashPassword(password);
+            return hashedInput == hashedPassword;
+        }
     }
+    
 }

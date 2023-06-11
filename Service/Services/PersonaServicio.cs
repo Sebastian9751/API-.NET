@@ -11,6 +11,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using Domain;
 
 namespace Service.Services
 {
@@ -98,19 +99,7 @@ namespace Service.Services
             }
             return empleados;
         }
-        public List<Asignaciones> ObtenerEmpleadosById(int id)
-        {
-            List<Asignaciones> empleados = new List<Asignaciones>();
-            try
-            {
-                empleados = personaRepositorio.ObtenerEmpleadosById(id);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-            }
-            return empleados;
-        }
+       
 
 
 
@@ -211,6 +200,20 @@ namespace Service.Services
         {
             string hashedInput = HashPassword(password);
             return hashedInput == hashedPassword;
+        }
+
+        public ItemEmpleado ObtenerEmpleadosById(int id)
+        {
+            ItemEmpleado empleados = new ItemEmpleado();
+            try
+            {
+                empleados = personaRepositorio.ObtenerEmpleadosById(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return empleados;
         }
     }
     

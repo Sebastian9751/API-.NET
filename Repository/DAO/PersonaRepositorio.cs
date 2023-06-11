@@ -4,6 +4,7 @@ using Repository.Context;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Logging;
+using Domain;
 
 namespace Repository.DAO
 {
@@ -61,27 +62,27 @@ namespace Repository.DAO
             return empleados;
         }
 
-        public List<Asignaciones> ObtenerEmpleadosById(int id)
+        public ItemEmpleado ObtenerEmpleadosById(int id)
         {
-            List<Asignaciones> empleados = new List<Asignaciones>();
+            ItemEmpleado empleado = (from asignacion in _context.Asignaciones
+                                     join item in _context.Items on asignacion.id_item equals item.id
+                                     where asignacion.id_persona == id
+                                     select new ItemEmpleado
+                                     {
+                                         Persona = asignacion.Persona,
+                                         Items = (from a in _context.Asignaciones
+                                                  join i in _context.Items on a.id_item equals i.id
+                                                  where a.id_persona == id
+                                                  select i).ToList()
+                                     }).FirstOrDefault();
 
-            empleados = (from asignacion in _context.Asignaciones
-                         join item in _context.Items on asignacion.id_item equals item.id
-                         where asignacion.id_persona == id
-                         select new Asignaciones
-                         {
-                             id = asignacion.id,
-                             id_persona = asignacion.id_persona,
-                             id_item = asignacion.id_item,
-                             dia_asignacion = asignacion.dia_asignacion,
-                             dia_entrega = asignacion.dia_entrega,
-                             dia_liberacion = asignacion.dia_liberacion,
-                             Persona = asignacion.Persona,
-                             Items = item
-                         }).ToList();
-
-            return empleados;
+            return empleado;
         }
+
+
+
+
+
 
         public string sedEmail(string email,string secret, string detination)
         {

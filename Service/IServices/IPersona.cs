@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain;
+using Domain.Entities;
 namespace Service.IServices
 {
     public interface IPersona
@@ -6,7 +7,8 @@ namespace Service.IServices
         List<Persona> ObtenerLista();
         List<Asignaciones> ObtenerEmpleado();
 
-        List<Asignaciones> ObtenerEmpleadosById(int id);
+        ItemEmpleado ObtenerEmpleadosById(int id);
+
 
         List<Items> ObtenerItemsDisponibles();
 

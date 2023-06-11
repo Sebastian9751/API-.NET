@@ -18,9 +18,6 @@ namespace Domain.Entities
         public string NombreItem { get; set; }
 
         public string Description { get; set; }
-
-      
-
         public bool status { get; set; }
     }
 }

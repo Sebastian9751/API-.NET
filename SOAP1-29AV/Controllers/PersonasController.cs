@@ -6,7 +6,7 @@ using System.Net;
 namespace SOAP1_29AV.Controllers
 {
     [ApiController]
-    [Route("Empleados")]
+    [Route("api/persona")]
     public class PersonasController : Controller
     {
         private readonly IPersona _persona;
@@ -22,14 +22,14 @@ namespace SOAP1_29AV.Controllers
             return Ok(_persona.ObtenerLista());
         }
 
-        [HttpGet("empleadosItems")]
+        [HttpGet("items")]
 
         public IActionResult getPesona()
         {
 
             return Ok(_persona.ObtenerEmpleado());
         }
-        [HttpGet("empleadosItemsById")]
+        [HttpGet("itemsById")]
 
         public IActionResult getPesonaById(int id)
         {
@@ -61,7 +61,7 @@ namespace SOAP1_29AV.Controllers
             return Ok(res);
         }
 
-        [HttpGet("EmpladoItemsFechaProxima")]
+        [HttpGet("itemsFechaProxima")]
         public IActionResult getPesonaItem()
         {
 

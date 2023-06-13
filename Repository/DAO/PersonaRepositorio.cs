@@ -205,7 +205,15 @@ namespace Repository.DAO
 
         public void DeleteEmpleado(int id)
         {
-            throw new NotImplementedException();
+            var employe = _context.Personas.Find(id);
+            if (employe == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
+
+            _context.Personas.Remove(employe);
+            _context.SaveChanges();
         }
 
         

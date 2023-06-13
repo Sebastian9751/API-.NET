@@ -218,7 +218,17 @@ namespace Service.Services
 
         public bool DeleteEmpleado(int id)
         {
+            try
+            {
+                personaRepositorio.DeleteEmpleado(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return false;
+            }
             return true;
+
         }
 
         public bool UpdateEmpleado(UpdatePersona persona)

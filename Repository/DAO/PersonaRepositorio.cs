@@ -179,11 +179,35 @@ namespace Repository.DAO
             _context.Items.Update(item);
             _context.SaveChanges();
         }
+        public void UpdateEmpleado(UpdatePersona persona)
+        {
+            var employe = _context.Personas.Find(persona.Id);
+            if (persona == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
 
+            employe.Name = persona.Name;
+            employe.email = persona.email;
+            employe.CURP = persona.CURP;
+            employe.numero_empleado = persona.numero_empleado;
+            employe.RFC = persona.RFC;
+            
+            _context.Personas.Update(employe);
+            _context.SaveChanges();
+        }
 
         public Persona GetPersona(string email)
         {
             return _context.Personas.FirstOrDefault(p => p.email == email) ?? new Persona();
         }
+
+        public void DeleteEmpleado(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

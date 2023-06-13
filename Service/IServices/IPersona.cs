@@ -9,7 +9,6 @@ namespace Service.IServices
 
         ItemEmpleado ObtenerEmpleadosById(int id);
 
-
         List<Items> ObtenerItemsDisponibles();
 
 
@@ -24,7 +23,9 @@ namespace Service.IServices
         void AsignarItem(ItemsVM  asignacion);
 
         void SetStatusItem(bool status, int id_item);
-
+        
+        bool DeleteEmpleado(int id);
+        bool UpdateEmpleado(UpdatePersona persona);
         List<string> sendMessageRemember(string email, string secret, string destination);
     }
 }

@@ -47,11 +47,25 @@ namespace SOAP1_29AV.Controllers
                 return BadRequest("El objeto Empleado es nulo");
             }
 
-           
+
             _persona.GuardarEmpleados(empleado);
 
-         return StatusCode((int)HttpStatusCode.Created, "Empleado creado exitosamente");
+            return StatusCode((int)HttpStatusCode.Created, "Empleado creado exitosamente");
         }
+
+        [HttpDelete("delete")]
+        public IActionResult DeleteEmpleado(int id)
+        {
+            return Ok(_persona.DeleteEmpleado(id));
+        }
+
+        [HttpPut("update")]
+        public IActionResult UpdateEmpleado(UpdatePersona persona)
+        {
+
+            return Ok(_persona.UpdateEmpleado(persona));
+        }
+
 
         [HttpPost("login")]
 
@@ -67,6 +81,9 @@ namespace SOAP1_29AV.Controllers
 
             return Ok(_persona.ObtenerEmpleado());
         }
+
+        
+
 
     }
 }

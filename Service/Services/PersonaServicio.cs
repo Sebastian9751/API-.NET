@@ -215,6 +215,25 @@ namespace Service.Services
             }
             return empleados;
         }
+
+        public bool DeleteEmpleado(int id)
+        {
+            return true;
+        }
+
+        public bool UpdateEmpleado(UpdatePersona persona)
+        {
+            try
+            {
+                personaRepositorio.UpdateEmpleado(persona);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return false;
+            }
+            return true;
+        }
     }
     
 }

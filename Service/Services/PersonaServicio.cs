@@ -244,6 +244,34 @@ namespace Service.Services
             }
             return true;
         }
+
+        public bool DeleteItem(int id)
+        {
+            try
+            {
+                personaRepositorio.DeleteItem(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public bool UpdateItem(Items item)
+        {
+            try
+            {
+                personaRepositorio.UpdateItem(item);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return false;
+            }
+            return true;
+        }
     }
     
 }

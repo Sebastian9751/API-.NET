@@ -197,6 +197,22 @@ namespace Repository.DAO
             _context.Personas.Update(employe);
             _context.SaveChanges();
         }
+        public void UpdateItem(Items item)
+        {
+            var data = _context.Items.Find(item.id);
+            if (data == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
+            data.NombreItem = item.NombreItem;
+            data.status = item.status;
+            data.Description = data.Description;
+            
+
+            _context.Items.Update(data);
+            _context.SaveChanges();
+        }
 
         public Persona GetPersona(string email)
         {
@@ -213,6 +229,19 @@ namespace Repository.DAO
             }
 
             _context.Personas.Remove(employe);
+            _context.SaveChanges();
+        }
+
+        public void DeleteItem(int id)
+        {
+            var item = _context.Items.Find(id);
+            if (item == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
+
+            _context.Items.Remove(item);
             _context.SaveChanges();
         }
 

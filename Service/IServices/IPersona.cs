@@ -25,7 +25,9 @@ namespace Service.IServices
         void SetStatusItem(bool status, int id_item);
         
         bool DeleteEmpleado(int id);
+        bool DeleteItem(int id);
         bool UpdateEmpleado(UpdatePersona persona);
+        bool UpdateItem(Items item);
         List<string> sendMessageRemember(string email, string secret, string destination);
     }
 }

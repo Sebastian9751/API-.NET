@@ -34,6 +34,19 @@ namespace SOAP1_29AV.Controllers
 
             return StatusCode((int)HttpStatusCode.Created, "Item creado exitosamente");
         }
+        [HttpDelete("delete")]
+        public IActionResult DeleteItem(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("El id  es nulo");
+            }
+
+
+            _persona.DeleteItem(id);
+
+            return StatusCode((int)HttpStatusCode.Created, "Item eliminado");
+        }
 
         [HttpPost("asignar")]
         public IActionResult AsignarItem(ItemsVM item)
@@ -49,7 +62,7 @@ namespace SOAP1_29AV.Controllers
             return StatusCode((int)HttpStatusCode.Created, "Item creado exitosamente");
         }
 
-        [HttpPut("StatusItem")]
+        [HttpPut("setStatus")]
         public IActionResult SetStatusItem(bool status, int id_item)
         {
             if (status == null || id_item== null)
@@ -63,7 +76,16 @@ namespace SOAP1_29AV.Controllers
             return StatusCode((int)HttpStatusCode.Created, "Item actualizado exitosamente");
         }
 
+        [HttpPut("update")]
 
+        public IActionResult UpdateItem(Items item) {
+            if (item == null )
+            {
+                return BadRequest("El objeto es nulo");
+            }
+
+            return Ok(_persona.UpdateItem(item));
+        }
 
     }
 }

@@ -189,6 +189,7 @@ namespace Repository.DAO
             }
 
             employe.Name = persona.Name;
+            employe.Lastname = persona.Lastname;
             employe.email = persona.email;
             employe.CURP = persona.CURP;
             employe.numero_empleado = persona.numero_empleado;

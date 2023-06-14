@@ -207,7 +207,7 @@ namespace Repository.DAO
             }
             data.NombreItem = item.NombreItem;
             data.status = item.status;
-            data.Description = data.Description;
+            data.Description = item.Description;
             
 
             _context.Items.Update(data);

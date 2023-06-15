@@ -246,6 +246,32 @@ namespace Repository.DAO
             _context.SaveChanges();
         }
 
-        
+        public void DeleteAsignacion(int idAsignacion)
+        {
+            var data = _context.Asignaciones.Find(idAsignacion);
+            if (data == null)
+            {
+                // Manejar caso de objeto no encontrado
+                return;
+            }
+
+            _context.Asignaciones.Remove(data);
+            _context.SaveChanges();
+        }
+
+        public void DeleteAsignacionByEmpleado(int id)
+        {
+            var data = _context.Asignaciones.Where(a => a.Persona.Id == id).ToList();
+
+            if (data.Count == 0)
+            {
+                // Manejar caso de objetos no encontrados
+                return;
+            }
+
+            _context.Asignaciones.RemoveRange(data);
+            _context.SaveChanges();
+        }
+
     }
 }

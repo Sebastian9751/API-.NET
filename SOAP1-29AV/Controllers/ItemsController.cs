@@ -43,9 +43,9 @@ namespace SOAP1_29AV.Controllers
             }
 
 
-            _persona.DeleteItem(id);
+            return Ok(_persona.DeleteItem(id));
 
-            return StatusCode((int)HttpStatusCode.Created, "Item eliminado");
+       
         }
 
         [HttpPost("asignar")]

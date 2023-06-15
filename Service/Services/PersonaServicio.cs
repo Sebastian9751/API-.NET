@@ -272,6 +272,34 @@ namespace Service.Services
             }
             return true;
         }
+
+        public string DeleteAsignaciones(int idAsignacion)
+        {
+            try
+            {
+                personaRepositorio.DeleteAsignacion(idAsignacion);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return "no se pudo realzar la operacion: "+e;
+            }
+            return "operacion exitosa";
+        }
+
+        public string DeleteAsignacionesByEmpleado(int id)
+        {
+            try
+            {
+                personaRepositorio.DeleteAsignacionByEmpleado(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return "no se pudo realzar la operacion: " + e;
+            }
+            return "operacion exitosa";
+        }
     }
     
 }

@@ -70,10 +70,20 @@ namespace Repository.DAO
                                      select new ItemEmpleado
                                      {
                                          Persona = asignacion.Persona,
-                                         Items = (from a in _context.Asignaciones
+                                         ItemEmpleadoDetail = (from a in _context.Asignaciones
                                                   join i in _context.Items on a.id_item equals i.id
-                                                  where a.id_persona == id
-                                                  select i).ToList()
+                                                  where a.id_persona == id      
+                                                  select new ItemEmpleadoDetail
+                                                  {
+                                                      Id = i.id,
+                                                      Id_asignacion = a.id,
+                                                      Nombre = i.NombreItem,
+                                                      Descripcion = i.Description,
+                                                      FechaAsignacion = a.dia_asignacion,
+                                                      FechaEntrega = a.dia_entrega,
+                                                      FechaLiberacion = a.dia_liberacion
+
+                                                  }).ToList()
                                      }).FirstOrDefault();
 
             return empleado;
